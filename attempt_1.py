@@ -78,8 +78,40 @@ print(Vector1.dot(Vector2))
 print(Vector1.cross(Vector2))
 print(Vector1.size())
 
-Vector3 = Vector([0, 180])
+Vector3 = Vector([0, 180])    #must be in degrees
 Vector4 = Vector([90, 270])
 
 print(Vector3.cosine())
 print(Vector4.sine())
+
+
+class Matrix:
+    def __init__(self, values):       # Constructor
+        self.values = np.array(values)
+
+    def __str__(self):        # String representation of the object
+        return str(self.values)
+    
+    def add(self, other):                       
+        output = np.add(self.values, other.values)     # np.add to add two matrix element-wise
+        return Matrix(output)
+    
+    def sub(self, other):
+        output = np.subtract(self.values, other.values)    # np.subtract to subtract two matrix element-wise
+        return Matrix(output)
+    
+    def mult(self, other):
+        output = np.matmul(self.values, other.values)   # np.matmul to do matrix multiplication of two matrix
+        return Matrix(output)
+    
+    def size(self):
+        return np.size(self.values)     # np.size to find the size of the matrix
+    
+Matrix1 = Matrix([[1, 2], [3, 4]])     
+Matrix2 = Matrix([[5, 6], [7, 8]])
+
+print()
+print(f"{Matrix1.add(Matrix2)}\n")
+print(f"{Matrix1.sub(Matrix2)}\n")
+print(f"{Matrix1.mult(Matrix2)}\n")
+print(f"{Matrix1.size()}\n")
