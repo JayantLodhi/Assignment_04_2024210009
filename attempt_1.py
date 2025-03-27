@@ -35,3 +35,51 @@ print(Scalar1.multiply(Scalar2))
 print(Scalar1.pow(Scalar2))
 print(Scalar1.exp())
 print(Scalar1.size())
+
+
+class Vector:
+    def __init__(self, values):        # Constructor
+        self.values = np.array(values)
+
+    def __str__(self):            # String representation of the object
+        return str(self.values)
+    
+    def add(self, other):                    
+        output = np.add(self.values, other.values)      # np.add to add two arrays element-wise
+        return Vector(output)
+    
+    def cosine(self):
+        radian_values = np.radians(self.values)    #np.radians to convert the values from degree to radian               
+        output = np.cos(radian_values)     #np.cos to find cosine of the array element-wise
+        return Vector(output)
+    
+    def sine(self):
+        radian_values = np.radians(self.values)   #np.radians to convert the values from degree to radian
+        output = np.sin(radian_values)   #np.sin to find sine of the array element-wise
+        return Vector(output)
+
+    def dot(self, other):
+        output = np.dot(self.values, other.values)   #np.dot to find dot product of two arrays
+        return Scalar(output)
+    
+    def cross(self, other):
+        output = np.cross(self.values, other.values)  #np.cross to find cross product of two arrays
+        return Vector(output)
+    
+    def size(self):
+        return np.size(self.values)    #np.size to find the size of the array
+    
+Vector1 = Vector([1, 2, 3])
+Vector2 = Vector([4, 5, 6])
+
+print()
+print(Vector1.add(Vector2))
+print(Vector1.dot(Vector2))
+print(Vector1.cross(Vector2))
+print(Vector1.size())
+
+Vector3 = Vector([0, 180])
+Vector4 = Vector([90, 270])
+
+print(Vector3.cosine())
+print(Vector4.sine())
