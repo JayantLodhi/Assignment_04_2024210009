@@ -11,6 +11,13 @@ class Scalar:
         output = self.value + other.value
         return Scalar(output)
     
+    def sum(self, *args):    # args can take n number of arguments and returns tuple of arguments
+        output = self.value
+
+        for scalar_obj in args:
+            output += scalar_obj.value
+        return Scalar(output)
+        
     def multiply(self, other):           # method to multiply two Scalar objects
         output = self.value * other.value
         return Scalar(output)
@@ -35,6 +42,15 @@ print(Scalar1.multiply(Scalar2))
 print(Scalar1.pow(Scalar2))
 print(Scalar1.exp())
 print(Scalar1.size())
+
+
+Scalar3 = Scalar(4)
+Scalar4 = Scalar(5)
+
+print(Scalar1.sum(Scalar2, Scalar3, Scalar4))  
+
+print(Scalar1.sum())
+
 
 
 class Vector:
