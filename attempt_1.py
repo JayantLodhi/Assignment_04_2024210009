@@ -37,19 +37,19 @@ class Scalar:
 Scalar1 = Scalar(2)
 Scalar2 = Scalar(3)
 
-print(Scalar1.add(Scalar2))
-print(Scalar1.multiply(Scalar2))
-print(Scalar1.pow(Scalar2))
-print(Scalar1.exp())
-print(Scalar1.size())
+#this methods will not change the original Scalar1
+print(Scalar1.add(Scalar2))        #5
+print(Scalar1.multiply(Scalar2))   #6
+print(Scalar1.pow(Scalar2))        #8
+print(Scalar1.exp())         #7.38905609893065
+print(Scalar1.size())       #1
 
 
 Scalar3 = Scalar(4)
 Scalar4 = Scalar(5)
 
-print(Scalar1.sum(Scalar2, Scalar3, Scalar4))  
-
-print(Scalar1.sum())
+print(Scalar1.sum(Scalar2, Scalar3, Scalar4))  #14 
+print(Scalar1.sum())    #2
 
 
 
@@ -88,17 +88,18 @@ class Vector:
 Vector1 = Vector([1, 2, 3])
 Vector2 = Vector([4, 5, 6])
 
+#this methods will not change the original Vector1
 print()
-print(Vector1.add(Vector2))
-print(Vector1.dot(Vector2))
-print(Vector1.cross(Vector2))
-print(Vector1.size())
+print(Vector1.add(Vector2))   #[5 7 9]
+print(Vector1.dot(Vector2))   #32
+print(Vector1.cross(Vector2))  #[-3 6 3]
+print(Vector1.size())    #3
 
 Vector3 = Vector([0, 180])    #must be in degrees
 Vector4 = Vector([90, 270])
 
-print(Vector3.cosine())
-print(Vector4.sine())
+print(Vector3.cosine())  #[ 1. -1.]
+print(Vector4.sine())  #[ 1. -1.]
 
 
 class Matrix:
@@ -126,8 +127,9 @@ class Matrix:
 Matrix1 = Matrix([[1, 2], [3, 4]])     
 Matrix2 = Matrix([[5, 6], [7, 8]])
 
+#this methods will not change the original Matrix1
 print()
-print(f"{Matrix1.add(Matrix2)}\n")
-print(f"{Matrix1.sub(Matrix2)}\n")
-print(f"{Matrix1.mult(Matrix2)}\n")
-print(f"{Matrix1.size()}\n")
+print(f"{Matrix1.add(Matrix2)}\n")   #[[6 8][10 12]]
+print(f"{Matrix1.sub(Matrix2)}\n")   #[[-4 -4 ][-4 -4]]
+print(f"{Matrix1.mult(Matrix2)}\n")  #[[19 22][43 50]]
+print(f"{Matrix1.size()}\n")   #4 
