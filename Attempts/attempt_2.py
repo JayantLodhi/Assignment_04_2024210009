@@ -1,55 +1,113 @@
 import numpy as np
 
-class Entities:            # base class for all entities
-    def __init__(self, value):
-        self.value = np.array(value)
+class Scalar:            
+    def __init__(self, value):    # Constructor
+        val = np.array(value)
+
+        if val.ndim == 0:       #val.ndim == 0 because dimension of np.array(int/float) will be 0.
+            self.value = val
+        else:
+            raise ValueError("Argument must be integar or float")  # this will raise error
 
     def __str__(self):      # String representation of the object
         return str(self.value)
     
-class Scalar(Entities):  # scalar inherit from Entities class
-    pass
+class Vector:
+    def __init__(self, value):    # Constructor
+        val = np.array(value)
 
-class Vector(Entities):  # vector inherit from Entities class
-    pass   
+        if val.ndim == 1:      #val.ndim == 1 because dimension of np.array(1d list) will be 1.
+            self.value = val
+        else: 
+            raise ValueError("Argument must be vector (1 dimension list)")  # this will raise error
 
-class Matrix(Entities):  # matrix inherit from Entities class
-    pass
+    def __str__(self):      # String representation of the object
+        return str(self.value)
 
+class Matrix:
+    def __init__(self, value):    # Constructor
+        val = np.array(value)
+
+        if val.ndim == 2:              #val.ndim == 2 because dimension of np.array(2d list)) will be 2.
+            self.value = val
+        else:
+            raise ValueError("Argument must be matrix (2 dimensional list)")    # this will raise error
+
+    def __str__(self):      # String representation of the object
+        return str(self.value)
+    
 
 class Scalar_function:  
 
     @staticmethod               
-    def add(scalar1, scalar2):                   # method to add two Scalar objects     
-        output = scalar1.value + scalar2.value
-        return Scalar(output)
+    def add(scalar1, scalar2):                   # method to add two Scalar objects 
+
+        if isinstance(scalar1, Scalar) and isinstance(scalar2, Scalar):
+            
+            output = scalar1.value + scalar2.value
+            return Scalar(output)
+        
+        else:
+            raise ValueError("Both Argument must be of type Scalar")
     
     @staticmethod                        # method to add multiple Scalar objects (require minimum 2 arguments)
     def sum(scalar1, scalar2, *args):   # args can take n number of arguments and returns tuple of arguments
-        output = scalar1.value + scalar2.value  
-
+        
+        if isinstance(scalar1, Scalar) and isinstance(scalar2, Scalar):
+            output = scalar1.value + scalar2.value  
+        else:
+            raise ValueError("All argument must be of type Scalar")
+        
         for scalar_obj in args:
-            output += scalar_obj.value
+
+            if isinstance(scalar_obj, Scalar): 
+                output += scalar_obj.value
+            else:
+                raise ValueError("All argument must be of type Scalar")
+            
         return Scalar(output)
 
     @staticmethod
     def mult(scalar1, scalar2):       # method to multiply two Scalar objects
-        output = scalar1.value * scalar2.value
-        return Scalar(output)
+
+        if isinstance(scalar1, Scalar) and isinstance(scalar2, Scalar):
+            
+            output = scalar1.value * scalar2.value
+            return Scalar(output)
+        
+        else:
+            raise ValueError("Both Argument must be of type Scalar")
     
     @staticmethod
     def pow(scalar1, scalar2):           # method to find power of first Scalar object to the second Scalar object
-        output = scalar1.value ** scalar2.value
-        return Scalar(output)
+
+        if isinstance(scalar1, Scalar) and isinstance(scalar2, Scalar):
+
+            output = scalar1.value ** scalar2.value
+            return Scalar(output)
+        
+        else:
+            raise ValueError("Both Argument must be of type Scalar")
     
     @staticmethod
     def exp(scalar):         # method to find exponential of the Scalar object
-        output = np.exp(scalar.value)
-        return Scalar(output)
+
+        if isinstance(scalar, Scalar):
+
+            output = np.exp(scalar.value)
+            return Scalar(output)
+        
+        else:
+            raise ValueError("Argument must be of type Scalar")
     
     @staticmethod
-    def size(scalar1):       # method to return the size of the Scalar object
-        return np.size(scalar1.value)
+    def size(scalar):       # method to return the size of the Scalar object
+
+        if isinstance(scalar, Scalar):
+            return np.size(scalar.value)
+        
+        else:
+            raise ValueError("Argument must be of type Scalar")
     
 Scalar1 = Scalar(2)
 Scalar2 = Scalar(3)
@@ -70,35 +128,70 @@ print(Scalar_function.sum(Scalar1, Scalar2, Scalar3, Scalar4)) #14
 class Vector_function:  
 
     @staticmethod               
-    def add(vector1, vector2):                   # method to add two Vector objects     
-        output = np.add(vector1.value, vector2.value)
-        return Vector(output)
+    def add(vector1, vector2):                   # method to add two Vector objects
+
+        if isinstance(vector1, Vector) and isinstance(vector2, Vector):
+
+            output = np.add(vector1.value, vector2.value)
+            return Vector(output)
+        
+        else:
+            raise ValueError("Both argument must be of type Vector")
     
     @staticmethod
     def cosine(vector):  # to find cosine of the array element-wise
-        radian_value = np.radians(vector.value)  # Convert degrees to radians
-        output = np.cos(radian_value)
-        return Vector(output)
-    
+
+        if isinstance(vector, Vector):
+            
+            radian_value = np.radians(vector.value)  # Convert degrees to radians
+            output = np.cos(radian_value)
+            return Vector(output)
+        
+        else:
+            raise ValueError("Argument must be of type Vector")
+
     @staticmethod
     def sine(vector):    # to find sine of the array element-wise
-        radian_value = np.radians(vector.value)  # Convert degrees to radians
-        output = np.sin(radian_value)
-        return Vector(output)
+
+        if isinstance(vector, Vector):
+
+            radian_value = np.radians(vector.value)  # Convert degrees to radians
+            output = np.sin(radian_value)
+            return Vector(output)
+        
+        else:
+            raise ValueError("Argument must be of type Vector")
     
     @staticmethod
     def dot(vector1, vector2):   # to find dot product of two array
-        output = np.dot(vector1.value, vector2.value)
-        return Scalar(output)
+
+        if isinstance(vector1, Vector) and isinstance(vector2, Vector):
+            
+            output = np.dot(vector1.value, vector2.value)
+            return Scalar(output)
     
+        else:
+            raise ValueError("Both argument must be of type Vector")
+        
     @staticmethod
     def cross(vector1, vector2):  # to find cross product of two array
-        output = np.cross(vector1.value, vector2.value)
-        return Vector(output)
+
+        if isinstance(vector1, Vector) and isinstance(vector2, Vector):
+            
+            output = np.cross(vector1.value, vector2.value)
+            return Vector(output)
+        
+        else:
+            raise ValueError("Both argument must be of type Vector")
     
     @staticmethod
     def size(vector):    # to find the size of the array
-        return np.size(vector.value)
+
+        if isinstance(vector, Vector):
+            return np.size(vector.value)
+        
+        else:
+            raise ValueError("Argument must be of type Vector")
     
 
 Vector1 = Vector([1, 2, 3])
@@ -119,23 +212,46 @@ print(Vector_function.sine(Vector3))  # [0.5 0.70710678 0.8660254 ]
 class Matrix_function:
 
     @staticmethod
-    def add(matrix1, matrix2):                   # method to add two Matrix objects     
-        output = np.add(matrix1.value, matrix2.value)
-        return Matrix(output)
+    def add(matrix1, matrix2):                   # method to add two Matrix objects
+
+        if isinstance(matrix1, Matrix) and isinstance(matrix2, Matrix):     
+        
+            output = np.add(matrix1.value, matrix2.value)
+            return Matrix(output)
+        
+        else:
+            raise ValueError("Both argument must be of type Matrix")
     
     @staticmethod
     def sub(matrix1, matrix2):  # to sub two matrix objects
-        output = np.subtract(matrix1.value, matrix2.value)
-        return Matrix(output)
+
+        if isinstance(matrix1, Matrix) and isinstance(matrix2, Matrix):
+        
+            output = np.subtract(matrix1.value, matrix2.value)
+            return Matrix(output)
+        
+        else:
+            raise ValueError("Both argument must be of type Matrix")
     
     @staticmethod
     def mult(matrix1, matrix2):       # method to multiply two Matrix objects
-        output = np.matmul(matrix1.value, matrix2.value)
-        return Matrix(output)
+
+        if isinstance(matrix1, Matrix) and isinstance(matrix2, Matrix):
+
+            output = np.matmul(matrix1.value, matrix2.value)
+            return Matrix(output)
+        
+        else:
+            raise ValueError("Both argument must be of type Matrix")
     
     @staticmethod
     def size(matrix):       # method to return the size of the Matrix object
-        return np.size(matrix.value)
+        
+        if isinstance(matrix, Matrix):
+            return np.size(matrix.value)
+        
+        else:
+            raise ValueError("Argument must be of type Matrix")
     
 Matrix1 = Matrix([[1, 2], [3, 4]])
 Matrix2 = Matrix([[5, 6], [7, 8]])
