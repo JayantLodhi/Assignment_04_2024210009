@@ -252,6 +252,46 @@ class Matrix_function:
         
         else:
             raise ValueError("Argument must be of type Matrix")
+        
+    @staticmethod
+    def trace(matrix):         # Method to find transpose of the Matrix object
+
+        if isinstance(matrix, Matrix):
+            shape = np.shape(matrix.value)
+            row, column = shape   
+
+            if row == column:        
+                trace = 0  #initially zero
+
+                for i in range(0, shape[0]):
+                    trace += matrix.value[i,i]   #increasing trace by matrix[row=column] in each iteration
+                    
+                return Scalar(trace)
+            
+            else:
+                raise ValueError("Matrix must be square")
+
+        else:
+            raise ValueError("Argument must be of type Matrix")
+        
+    @staticmethod
+    def transpose(matrix):
+
+        if isinstance(matrix, Matrix):
+
+            shape = np.shape(matrix.value)
+            row, column = shape
+
+            tran_mat = np.empty((column, row))   #initially empty matrix with reverse shape
+
+            for r in range(0, row):
+                for c in range(0, column):
+                    tran_mat[c,r] = matrix.value[r,c]    #substituting transposed value
+                     
+            return Matrix(tran_mat)
+
+        else:
+            raise ValueError("Argument must be of type Matrix")
     
 Matrix1 = Matrix([[1, 2], [3, 4]])
 Matrix2 = Matrix([[5, 6], [7, 8]])
@@ -261,3 +301,9 @@ print(f"{Matrix_function.add(Matrix1, Matrix2)}\n")  # [[6 8][10 12]]
 print(f"{Matrix_function.sub(Matrix1, Matrix2)}\n")   # [[-4 -4][-4 -4]]
 print(f"{Matrix_function.mult(Matrix1, Matrix2)}\n")  # [[19 22][43 50]]
 print(f"{Matrix_function.size(Matrix1)}\n")  # 4
+
+print(f"{Matrix_function.trace(Matrix2)}\n")  # 13
+
+Matrix3 = Matrix([[1,2,3],[4,5,6]])
+
+print(f"{Matrix_function.transpose(Matrix3)}\n")
