@@ -222,7 +222,7 @@ class Matrix_function:
     def size(matrix):       # method to return the size of the Matrix object
         
         if isinstance(matrix, Matrix):
-            return np.size(matrix.value)
+            return np.shape(matrix.value)
         
         else:
             raise ValueError("Argument must be of type Matrix")

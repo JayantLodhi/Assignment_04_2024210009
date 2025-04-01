@@ -8,7 +8,7 @@ print()
 print(f"{mf.add(m1, m2)}\n")  # [[6 8][10 12]]
 print(f"{mf.sub(m1, m2)}\n")   # [[-4 -4][-4 -4]]
 print(f"{mf.mult(m1, m2)}\n")  # [[19 22][43 50]]
-print(f"{mf.size(m1)}\n")  # 4
+print(f"{mf.size(m1)}\n")  # (2,2)
 
 print(f"{mf.trace(m2)}\n")  # 13
 
