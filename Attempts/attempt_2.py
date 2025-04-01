@@ -179,7 +179,11 @@ class Vector_function:
         if isinstance(vector1, Vector) and isinstance(vector2, Vector):
             
             output = np.cross(vector1.value, vector2.value)
-            return Vector(output)
+            
+            if np.array(output).ndim == 0:
+                return Scalar(output)
+            else:
+                return Vector(output)
         
         else:
             raise ValueError("Both argument must be of type Vector")
